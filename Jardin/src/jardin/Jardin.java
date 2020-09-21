@@ -78,7 +78,9 @@ public class Jardin {
 			str += m.getKey() + " : " + m.getValue() + " graine(s)\n";
 					
         }
+		
 		return str;
+		
 	}
 	
 	
