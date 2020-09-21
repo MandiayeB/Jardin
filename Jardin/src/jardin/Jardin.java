@@ -1,5 +1,6 @@
 package jardin;
 import java.util.HashMap;
+import java.util.Map;
 public class Jardin {
 	
 	private int longueur;
@@ -52,6 +53,32 @@ public class Jardin {
 		this.emplacement = new Emplacement[longueur][largeur];
 		this.panier = new HashMap<String, Integer>();
 		
+	}
+	
+	@Override
+	public String toString() {
+		
+		String str = "Voici notre jardin :\n";
+		
+		for (int i = 0; i < getEmplacement().length; i++) {
+
+			for (int j = 0; j < getEmplacement()[i].length; j++) {
+
+				str += "o";
+
+			}
+
+			str += "\n";
+		}
+		
+		str += "Et voici notre panier :\n";
+		
+		for (Map.Entry<String, Integer> m : this.panier.entrySet()) {
+            
+			str += m.getKey() + " : " + m.getValue() + " graine(s)\n";
+					
+        }
+		return str;
 	}
 	
 	
