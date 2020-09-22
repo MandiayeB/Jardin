@@ -1,5 +1,6 @@
 package terre;
 import jardin.Jardin;
+import java.util.Scanner;
 public class Terre {
 
 	public static void main(String[] args) {
@@ -12,7 +13,24 @@ public class Terre {
 		jardin.ajouterPanier( "Ail", 2 );
 		
 		System.out.println(jardin.toString());
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		try {
 
+			System.out.println("1. Semer une graine");
+			System.out.println("2. Récolter toutes les plantes qui sont matures");
+			System.out.println("3. Passer à la saison suivante (toutes les plantes grandissent)");
+			System.out.println("4. Quitter l’application");
+			int res = scanner.nextInt();
+
+		} finally {
+			
+			scanner.close();
+			
+		}
+		
+		
 	}
 
 }

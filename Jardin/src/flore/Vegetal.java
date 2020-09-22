@@ -3,35 +3,31 @@ package flore;
 public abstract class Vegetal {
 	
 	protected Etat etat;
-	protected Etat dessin;
-	
-	public Etat getEtat() {
-		return etat;
-	}
-	
-	public void setEtat(Etat etat) {
-		this.etat = etat;
-	}
-	
-	public Etat getDessin() {
-		return dessin;
-	}
-	
-	public void setDessin(Etat dessin) {
-		this.dessin = dessin;
-	}
-	
+	protected String dessin[];
+
 	public Vegetal () {
 		
-		String tableau[] = new String [6];
-		tableau[0] = "_";
-		tableau[1] = ".";
-		tableau[2] = "|";
-		tableau[5] = "#";
+		dessin = new String [6];
+		dessin[0] = "_";
+		dessin[1] = ".";
+		dessin[2] = "|";
+		dessin[5] = "#";
 		
 		this.etat = Etat.GRAINE;
 		
 		
+	}
+	
+	public void grandir() {
+		
+		this.etat = Etat.values()[this.etat.ordinal() + 1];
+
+	}
+	@Override
+	public String toString()  {
+
+		return dessin[this.etat.ordinal()];
+
 	}
 	
 }

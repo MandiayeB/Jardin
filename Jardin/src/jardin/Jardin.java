@@ -1,44 +1,14 @@
 package jardin;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Map;
+
 public class Jardin {
 	
 	private int longueur;
 	private int largeur;
 	Emplacement emplacement[][];
 	private HashMap<String, Integer> panier;
-
-	public int getLongueur() {
-		return longueur;
-	}
-
-	public void setLongueur(int longueur) {
-		this.longueur = longueur;
-	}
-
-	public int getLargeur() {
-		return largeur;
-	}
-
-	public void setLargeur(int largeur) {
-		this.largeur = largeur;
-	}
-	
-	public Emplacement[][] getEmplacement() {
-		return emplacement;
-	}
-
-	public void setEmplacement(Emplacement[][] emplacement) {
-		this.emplacement = emplacement;
-	}
-	
-	public HashMap<String, Integer> getPanier() {
-		return panier;
-	}
-
-	public void setPanier(HashMap<String, Integer> panier) {
-		this.panier = panier;
-	}
 	
 	public void ajouterPanier(String nomDuVegetal, Integer quantite) {
 		
@@ -55,16 +25,72 @@ public class Jardin {
 		
 	}
 	
+	public void semer() {
+		
+		Scanner scanner = new Scanner(System.in);
+		try {
+			
+			System.out.println("Quelle plante désirez-vous ?\n1-Ail\n2-Betterave\n3-Carotte\n4-Tomate\n");
+			int choice = scanner.nextInt();
+			
+			if ( choice == 1 ) {
+				 
+			} else if ( choice == 2 ) {
+				
+			} else if ( choice == 3 ) {
+				
+			} else if ( choice == 4 ) {
+				
+			}
+			
+			System.out.println("Où souhaitez-vous placer votre graine ?");
+			System.out.print("x :");
+			int res = scanner.nextInt();
+			System.out.print("y :");
+			int ans = scanner.nextInt();
+			this.emplacement[res][ans] = new Emplacement(new Ail());
+
+
+		} finally {
+			
+			scanner.close();
+			
+		}
+		
+	}
+	
+	public void saisonSuivante() {
+		
+		for ( int x = 0; x < longueur; x++ ) {
+			
+			for ( int y = 0; y < largeur; y++ ) {
+			
+				this.emplacement[x][y].getVegetal().grandir();
+			
+			}
+		
+		}
+		
+	}
+	
 	@Override
 	public String toString() {
 		
 		String str = "Voici notre jardin :\n";
 		
-		for (int i = 0; i < getEmplacement().length; i++) {
+		for (int i = 0; i < longueur; i++) {
 
-			for (int j = 0; j < getEmplacement()[i].length; j++) {
+			for (int j = 0; j < largeur; j++) {
 
-				str += "o";
+				if ( emplacement[i][j] == null ) {
+					
+					str += "o";
+				
+				} else {
+					
+					str += emplacement[i][j].toString();
+					
+				}
 
 			}
 

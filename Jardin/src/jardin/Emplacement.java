@@ -7,10 +7,6 @@ public class Emplacement {
 	public Vegetal getVegetal() {
 		return vegetal;
 	}
-
-	public void setVegetal(Vegetal vegetal) {
-		this.vegetal = vegetal;
-	}
 	
 	public Emplacement(Vegetal vegetal) {
 		this.vegetal = vegetal;
@@ -18,7 +14,9 @@ public class Emplacement {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		
+		String str = vegetal.toString();
+		return str;
+	
 	}
 }
