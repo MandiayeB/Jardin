@@ -4,6 +4,14 @@ public abstract class Vegetal {
 	
 	protected Etat etat;
 	protected String dessin[];
+	
+	public Etat getEtat() {
+		return etat;
+	}
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
+	}
 
 	public Vegetal () {
 		
@@ -23,6 +31,7 @@ public abstract class Vegetal {
 		this.etat = Etat.values()[this.etat.ordinal() + 1];
 
 	}
+	
 	@Override
 	public String toString()  {
 

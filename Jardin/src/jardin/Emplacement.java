@@ -3,7 +3,7 @@ import flore.Vegetal;
 public class Emplacement {
 	
 	private Vegetal vegetal;
-
+	
 	public Vegetal getVegetal() {
 		return vegetal;
 	}
@@ -17,6 +17,6 @@ public class Emplacement {
 		
 		String str = vegetal.toString();
 		return str;
-	
+		
 	}
 }

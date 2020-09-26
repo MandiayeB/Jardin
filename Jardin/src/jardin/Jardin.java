@@ -1,6 +1,13 @@
 package jardin;
 import java.util.HashMap;
 import java.util.Scanner;
+import flore.Ail;
+import flore.Betterave;
+import flore.Carotte;
+import flore.Tomate;
+import flore.Etat;
+import flore.IOgm;
+import flore.IRacePure;
 import java.util.Map;
 
 public class Jardin {
@@ -28,32 +35,42 @@ public class Jardin {
 	public void semer() {
 		
 		Scanner scanner = new Scanner(System.in);
-		try {
+	
+		System.out.println("Quelle plante désirez-vous ?\n1-Ail\n2-Betterave\n3-Carotte\n4-Tomate\n");
+		int choice = scanner.nextInt();
+		
+		System.out.println("Où souhaitez-vous placer votre graine ?");
+		System.out.print("x :");
+		int x = scanner.nextInt();
+		
+		System.out.print("y :");
+		int y = scanner.nextInt();
+		
+		
+		
+		if ( choice == 1 ) {
 			
-			System.out.println("Quelle plante désirez-vous ?\n1-Ail\n2-Betterave\n3-Carotte\n4-Tomate\n");
-			int choice = scanner.nextInt();
+			 this.emplacement[x][y] = new Emplacement(new Ail());
+			 int replace = this.panier.get("Ail");
+			 this.panier.put( "Ail", replace - 1 );
+			 
+		} else if ( choice == 2 ) {
 			
-			if ( choice == 1 ) {
-				 
-			} else if ( choice == 2 ) {
-				
-			} else if ( choice == 3 ) {
-				
-			} else if ( choice == 4 ) {
-				
-			}
+			this.emplacement[x][y] = new Emplacement(new Betterave());
+			int replace = this.panier.get("Betterave");
+			this.panier.put( "Betterave", replace - 1 );
 			
-			System.out.println("Où souhaitez-vous placer votre graine ?");
-			System.out.print("x :");
-			int res = scanner.nextInt();
-			System.out.print("y :");
-			int ans = scanner.nextInt();
-			this.emplacement[res][ans] = new Emplacement(new Ail());
-
-
-		} finally {
+		} else if ( choice == 3 ) {
 			
-			scanner.close();
+			this.emplacement[x][y] = new Emplacement(new Carotte());
+			int replace = this.panier.get("Carotte");
+			this.panier.put( "Carotte", replace - 1 );
+			
+		} else if ( choice == 4 ) {
+			
+			this.emplacement[x][y] = new Emplacement(new Tomate());
+			int replace = this.panier.get("Tomate");
+			this.panier.put( "Tomate", replace - 1 );
 			
 		}
 		
@@ -64,11 +81,58 @@ public class Jardin {
 		for ( int x = 0; x < longueur; x++ ) {
 			
 			for ( int y = 0; y < largeur; y++ ) {
-			
-				this.emplacement[x][y].getVegetal().grandir();
+				
+				if ( this.emplacement[x][y] != null ) {
+					
+					if ( emplacement[x][y].getVegetal().getEtat() !=  Etat.MORT ) {
+						
+						this.emplacement[x][y].getVegetal().grandir();
+					
+					} else {
+						
+						this.emplacement[x][y] = null;
+						
+					}
+				
+				}
 			
 			}
 		
+		}
+	}
+	
+	public void recolter() {
+		
+		for ( int i = 0; i < longueur; i++ ) {
+			
+			for ( int j = 0; j < largeur; j++ ) {
+				
+				if ( emplacement[i][j] != null ) {
+					
+					if ( emplacement[i][j].getVegetal().getEtat() ==  Etat.FLEUR ) {
+						
+						if ( emplacement[i][j].getVegetal() instanceof IRacePure ) {
+							
+							IRacePure v = (IRacePure) emplacement[i][j].getVegetal();
+							v.seReproduire(panier);
+							
+						}
+						
+						if ( emplacement[i][j].getVegetal() instanceof IOgm ) {
+
+							IOgm v = (IOgm) emplacement[i][j].getVegetal();
+							emplacement[v.seDupliquer(longueur, largeur).getKey()][v.seDupliquer(longueur, largeur).getValue()] = new Emplacement(new Betterave());
+
+						}
+						
+						emplacement[i][j] = null;
+						
+					}
+					
+				}
+				
+			}
+			
 		}
 		
 	}
@@ -83,9 +147,9 @@ public class Jardin {
 			for (int j = 0; j < largeur; j++) {
 
 				if ( emplacement[i][j] == null ) {
-					
+
 					str += "o";
-				
+
 				} else {
 					
 					str += emplacement[i][j].toString();
@@ -102,7 +166,7 @@ public class Jardin {
 		for (Map.Entry<String, Integer> m : this.panier.entrySet()) {
             
 			str += m.getKey() + " : " + m.getValue() + " graine(s)\n";
-					
+			
         }
 		
 		return str;

@@ -1,6 +1,8 @@
 package flore;
 
-public class Ail extends Vegetal {
+import java.util.HashMap;
+
+public class Ail extends Vegetal implements IRacePure {
 	
 	public Ail () {
 		
@@ -8,5 +10,12 @@ public class Ail extends Vegetal {
 		dessin[3] = "a";
 		dessin[4] = "A";
 	
+	}
+
+	@Override
+	public void seReproduire(HashMap<String, Integer> panier) {
+		
+		panier.put( "Ail", panier.get("Ail") + 3 );
+		
 	}	
 }
